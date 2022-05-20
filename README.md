@@ -61,9 +61,24 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/m
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+### Docker Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+To build the dockerfile
+`docker build -f Dockerfile -t frontend .`
+
+To run docker interactively
+`docker run -it --rm -p 80:80 frontend`
+
+To run docker in detached mode
+`docker run -d -p 80:80 frontend`
+
+### Tutorial on Dockerizing a React App
+
+[https://mherman.org/blog/dockerizing-a-react-app/](https://mherman.org/blog/dockerizing-a-react-app/)
+
+### Connect to Linux instance on AWS using SSH
+
+[https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
 
 ### `npm run build` fails to minify
 
