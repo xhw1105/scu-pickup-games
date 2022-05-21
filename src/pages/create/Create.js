@@ -11,24 +11,30 @@ export default function Create() {
   const [date, setDate] = useState('');
   const [sport, setSport] = useState('');
   const [playerName, setPlayerName] = useState('');
+  const [formError, setFormError] = useState(null);
   const history = useHistory();
   // const [ingredients, setIngredients] = useState([]);
   // const ingredientInput = useRef(null);
 
-  const { postData, data, error } = useFetch(
+  const { postData, data, error, isPending } = useFetch(
     `${process.env.REACT_APP_API_URL}:8088/api/new_event`,
     'POST'
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postData({
-      event_name: title,
-      place,
-      date,
-      sport,
-      user_name: playerName,
-    });
+    setFormError(null);
+    if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(date)) {
+      postData({
+        event_name: title,
+        place,
+        date,
+        sport,
+        user_name: playerName,
+      });
+    } else {
+      setFormError('Wrong date format.');
+    }
   };
 
   // const handleAdd = (e) => {
@@ -109,6 +115,7 @@ export default function Create() {
             type='text'
             onChange={(e) => setDate(e.target.value)}
             value={date}
+            placeholder='mm/dd/yyyy'
             required
           />
         </label>
@@ -123,7 +130,14 @@ export default function Create() {
           />
         </label>
 
-        <button className='btn'>submit</button>
+        {/* <button className='btn'>submit</button> */}
+        {!isPending && <button className='btn'>submit</button>}
+        {isPending && (
+          <button className='btn' disabled>
+            loading
+          </button>
+        )}
+        {formError && <p className='error'>{formError}</p>}
       </form>
     </div>
   );
