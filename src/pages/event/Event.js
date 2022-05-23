@@ -5,7 +5,7 @@ import { useFetch } from '../../hooks/useFetch';
 
 // styles
 import './Event.css';
-import Players from './Players';
+import PlayerList from './PlayerList';
 import { useDelete } from '../../hooks/useDelete';
 
 export default function Event() {
@@ -47,20 +47,20 @@ export default function Event() {
   }, [dataToDelete]);
 
   return (
-    <div className='recipe'>
+    <div className='event'>
       {error && <p className='error'>{error}</p>}
       {isPending && <p className='loading'>Loading...</p>}
       {event && (
         <>
           <button className='btn' onClick={handleDelete}>
-            Delete
+            Delete Event
           </button>
           <h2 className='page-title'>{event.event_name}</h2>
           <h3>Sport: {event.sport}</h3>
           <p>Date: {event.date}</p>
           <p>Place: {event.place}</p>
 
-          <Players id={id} players={event.user_list} />
+          <PlayerList id={id} players={event.user_list} />
           {/* <p className='method'>{recipe.method}</p> */}
         </>
       )}
